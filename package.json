@@ -1,0 +1,73 @@
+{
+  "name": "custom-component",
+  "version": "1.0.0",
+  "description": "Small class to create react like custom elements",
+  "main": "index.js",
+  "scripts": {
+    "start": "run-s watch",
+    "build": "run-s build:*",
+    "clean:dist": "cleandir \"dist\"",
+    "serve": "browser-sync start -s \"example\" -f \"example\"",
+    "copy:lib": "copyfiles -u -f 1 \"node_modules/requirejs/require.js\" example/js",
+    "copyto:dist": "copyfiles -u 1 \"src/custom-component/**/*.ts\" \"src/custom-element/**/*.ts\" \"dist\"",
+    "package:src": "run-s clean:dist copyto:dist",
+    "build:assets": "copyfiles -u 1 \"src/**/*.js\" \"src/**/*.css\" \"src/**/*.html\" \"src/**/*.{png,jpg,gif}\" example",
+    "build:scss": "node-sass --output-style compressed -r src -o example/css",
+    "build:tsc": "tsc",
+    "watch:tsc": "tsc -w",
+    "watch:scss": "onchange \"src/**/*.scss\" -- run-s build:scss",
+    "watch:assets": "onchange \"src/**/*.js\" \"src/**/*.css\" \"example/**/*.html\" \"src/**/*.{png,jpg,gif}\" -- run-s build:assets copy:lib",
+    "watch": "run-p serve watch:*",
+    "test": "jest"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/test"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest"
+    },
+    "testRegex": "((\\.|/)(test|spec))\\.(tsx|ts)?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "devDependencies": {
+    "@skatejs/bore": "^5.0.2",
+    "@types/jasmine": "^3.3.8",
+    "@types/jest": "^24.0.0",
+    "browser-sync": "^2.18.0",
+    "copyfiles": "^1.2.0",
+    "jest": "^24.1.0",
+    "node-sass": "^4.5.0",
+    "npm-run-all": "^4.0.0",
+    "onchange": "^3.2.0",
+    "requirejs": "^2.3.6",
+    "ts-jest": "^23.10.5",
+    "typescript": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fahimc/custom-component.git"
+  },
+  "keywords": [
+    "custom",
+    "elements",
+    "react",
+    "angular",
+    "web",
+    "components"
+  ],
+  "author": "Fahim Chowdhury",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fahimc/custom-component/issues"
+  },
+  "homepage": "https://github.com/fahimc/custom-component#readme",
+  "dependencies": {}
+}

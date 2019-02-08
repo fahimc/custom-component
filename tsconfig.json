@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {                    
+		"target": "es2015",
+		"module": "amd",
+        "outFile": "example/main.js",
+        "lib": [
+          "dom",
+          "es2015",
+          "es5",
+          "es6"
+        ],
+		"removeComments": true
+	},
+    "include": [
+        "src/**/*",
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}
