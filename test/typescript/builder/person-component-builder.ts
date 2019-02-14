@@ -1,4 +1,4 @@
-import {PersonComponent} from '../../src/example-component/person-component/person-component';
+import {PersonComponent} from '../../../src/example-component/person-component/person-component';
 
 export class PersonComponentBuilder {
 	private element:HTMLElement;

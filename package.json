@@ -9,8 +9,9 @@
     "clean:dist": "cleandir \"dist\"",
     "serve": "browser-sync start -s \"example\" -f \"example\"",
     "copy:lib": "copyfiles -u -f 1 \"node_modules/requirejs/require.js\" example/js",
-    "copyto:dist": "copyfiles -u 1 \"src/custom-component/**/*.ts\" \"src/custom-element/**/*.ts\" \"dist\"",
-    "package:src": "run-s clean:dist copyto:dist",
+    "copyto:dist:es6": "copyfiles -u 1 \"src/es6/custom-component.js\" \"dist\"",
+    "copyto:dist": "copyfiles -u 1 \"src/custom-component/**/*.ts\" \"src/custom-element/**/*.ts\" \"dist\typescript\"",
+    "package": "run-s clean:dist copyto:*",
     "build:assets": "copyfiles -u 1 \"src/**/*.js\" \"src/**/*.css\" \"src/**/*.html\" \"src/**/*.{png,jpg,gif}\" example",
     "build:scss": "node-sass --output-style compressed -r src -o example/css",
     "build:tsc": "tsc",
@@ -21,13 +22,15 @@
     "test": "jest"
   },
   "jest": {
+    "verbose": true,
     "roots": [
       "<rootDir>/test"
     ],
     "transform": {
-      "^.+\\.(ts|tsx)?$": "ts-jest"
+      "^.+\\.(ts|tsx)?$": "ts-jest",
+      "^.+\\.(js)?$": "babel-jest"
     },
-    "testRegex": "((\\.|/)(test|spec))\\.(tsx|ts)?$",
+    "testRegex": "((\\.|/)(test|spec))\\.(tsx|ts|js)?$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -37,10 +40,18 @@
       "node"
     ]
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
   "devDependencies": {
+    "@babel/preset-env": "^7.3.1",
     "@skatejs/bore": "^5.0.2",
     "@types/jasmine": "^3.3.8",
     "@types/jest": "^24.0.0",
+    "@webcomponents/custom-elements": "^1.2.1",
+    "babel-preset-latest": "^6.24.1",
     "browser-sync": "^2.18.0",
     "copyfiles": "^1.2.0",
     "jest": "^24.1.0",
@@ -69,5 +80,8 @@
     "url": "https://github.com/fahimc/custom-component/issues"
   },
   "homepage": "https://github.com/fahimc/custom-component#readme",
-  "dependencies": {}
+  "dependencies": {
+    "babel-jest": "^24.1.0",
+    "clean-dir": "^1.0.3"
+  }
 }
