@@ -21,6 +21,7 @@ export class CustomComponent extends HTMLElement {
     }
 
     createTemplate() {
+        if(!this.element) return;
         this.setTemplate();
 
         let shadowRoot = this.attachShadow({
